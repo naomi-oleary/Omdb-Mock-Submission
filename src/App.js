@@ -7,6 +7,7 @@ import Movies from './pages/Movies';
 import MovieInfo from './pages/MovieInfo';
 
 function App() {
+
   return (
     <Router>
         <div className="App">

@@ -1,7 +1,6 @@
 import React from 'react';
-import Logo from '../assets/Logo.jpg';
-import SlideCarousel from './ui/Carousel';
 import Movie from './ui/Movie';
+import { Link } from 'react-router-dom';
 
 export default function Explore() {
   return (
@@ -11,9 +10,9 @@ export default function Explore() {
                 <h2 className="explore__title">
                     Explore <span className="gold">top-rated movies</span> to ace your movie night
                 </h2>
-                <div className="movies__samples">
-                  <Movie />
-                </div>
+                <Link to="/Movies">
+                  <button className="browse-movies__btn">Browse Movies</button>
+                </Link>
             </div>
         </div>
     </>

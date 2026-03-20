@@ -176,26 +176,6 @@ li {
   opacity: calc(0.7);
 }
 
-/* .carousel__container {
-  display: flex;
-}
-
-.carousel__items {
-  gap: 12px;
-}
-
-.carousel__slide {
-  background-color: blanchedalmond;
-  height: 80vh;
-  width: 80vw;
-}
-
-.carousel__poster {
-  display: block;
-  width: 100%;
-  height: auto;
-} */
-
 .movies__samples {
     display: flex;
     justify-content: space-between;
@@ -232,25 +212,6 @@ li {
     opacity: 0.6;
     box-shadow: 0px 10px 20px rgba(201, 166, 72, 1);
 }
-
-/* .see-more {
-    visibility: hidden;
-    width: 100%;
-    text-align: center;
-    justify-content: center;
-    position: absolute;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.movie__wrapper:hover .see-more {
-    visibility: visible;
-} */
-
 
 /* FOOTER */
 

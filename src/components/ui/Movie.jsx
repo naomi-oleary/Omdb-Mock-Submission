@@ -5,10 +5,6 @@ const Movie = ({ movie }) => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // function onSearch() {
-  //   fetchPosts(searchTerm)
-  // }
-
   async function fetchMovies(searchTerm) {
     setLoading(true);
     const { data } = await axios.get(`https://www.omdbapi.com/?s=${searchTerm}&apikey=f311a7ce`);
@@ -39,7 +35,7 @@ const Movie = ({ movie }) => {
           </div>
         </div>
       ))
-      .slice(0, 6)
+      // .slice(0, 6)
       )}
     </>
   )

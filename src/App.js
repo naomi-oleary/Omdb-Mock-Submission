@@ -6,7 +6,8 @@ import Home from './pages/Home';
 import Movies from './pages/Movies';
 import MovieInfo from './pages/MovieInfo';
 
-function App() {
+
+function App () {
 
   return (
     <Router>

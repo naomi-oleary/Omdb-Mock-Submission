@@ -1,51 +1,84 @@
 import React, { useState, useEffect } from 'react'
 import Movie, { movies } from '../components/ui/Movie';
 import axios from 'axios';
+import Skeleton from '../components/ui/Skeleton';
+import { Link } from 'react-router-dom';
 
-const Movies = () => {
+const Movies = ({ movies: initialMovies }) => {
 
-    async function renderMovies(filter) {
-      let filteredMovies = [...movies];
+    const [searchTerm, setSearchTerm] = useState('');
+    const [movies, setMovies] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-      if (filter === "RATING") {
-        filteredMovies.sort((a, b) =>
-          a.Title.localeCompare(b.Title)
-        );
+    const handleChange = (event) => {
+      setSearchTerm(event.target.value);
+    }
+
+    const fetchData = async () => {
+      setIsLoading(true);
+        try {
+          const response = await axios.get(`https://www.omdbapi.com/?s=${searchTerm}&apikey=f311a7ce`)
+          setMovies(response.data.Search)
+        } 
+        catch (err) {
+          setError(err.message);
+        } finally {
+          setIsLoading(false);
+        }
+    }
+
+    useEffect (() => {
+      setTimeout(() => {
+        if (searchTerm) {
+          fetchData();
+        }
+        else {
+          setMovies(null);
+        }
+      }, 300)
+    }, [searchTerm]);
+
+    const [filteredMovies, setFilteredMovies] = useState(initialMovies);
+    const [searchID, setSearchID] = useState()
+
+    const fetchMovieInfo = async () => {
+      setIsLoading(true);
+      try {
+        const movieInfo = await axios.get(`https://www.omdbapi.com/?i=${searchID}&apikey=f311a7ce`)
+      } catch (err) {
+          setError(err.message);
+      } finally {
+        setIsLoading(false);
       }
-      if (filter === "LOW_TO_HIGH") {
-        filteredMovies.sort((a, b) =>
-          a.Year - b.Year
-        );
-      }}
+    }
 
-        const [searchTerm, setSearchTerm] = useState('');
-        const [movies, setMovies] = useState([]);
-        const [isLoading, setIsLoading] = useState(false);
-        const [error, setError] = useState(null);
+    useEffect (() => {
+      if (searchID) {
+        fetchMovieInfo();
+      } else {
+          setSearchID(null);
+      }
+    }, [searchID])
 
-        const handleChange = (event) => {
-          setSearchTerm(event.target.value);
-        }
-
-        const fetchData = async () => {
-          setIsLoading(true);
-          try {
-            const response = await axios.get(`https://www.omdbapi.com/?s=${searchTerm}&apikey=f311a7ce`)
-            setMovies(response.data.Search)
-          } catch (err) {
-            setError(err.message);
-          } finally {
-            setIsLoading(false);
-          }
-        }
-
-        useEffect (() => {
-          if (searchTerm) {
-            fetchData();
-          } else {
-            setMovies(null);
-          }
-        }, [searchTerm]);
+    async function filterMovies(filter) {
+      console.log(searchID)
+      // if (filter === "RATING") {
+      //   setFilteredMovies(filteredMovies
+      //       .slice()
+      //       .sort(
+      //         (a, b) => (
+      //           a.
+      //         )
+      //       )
+      //   )
+      // }
+      // if (filter === "LOW_TO_HIGH") {
+      //   filteredMovies.sort((a, b) =>
+      //     a.Year - b.Year
+      //   );
+      // }
+    }
 
     return (
       <div id="movies__body">
@@ -67,7 +100,7 @@ const Movies = () => {
                       ></input>
                     <button>Search</button>
                   </div>
-                  <select id="filter" defaultValue="DEFAULT" >
+                  <select id="filter" defaultValue="DEFAULT" onChange={(event) => filterMovies(event.target.value)} >
                     <option value="DEFAULT" disabled>Sort</option>
                     <option value="RATING">Rating, High to Low</option>
                     <option value="HIGH_TO_LOW">Year, New to Old</option>
@@ -75,10 +108,12 @@ const Movies = () => {
                   </select>
                 </div>
                 <div className="movies">
-                  {isLoading && <p>Loading...</p>}
+                  {isLoading && <Skeleton />}
                   {error && <p>Error: {error}</p>}
                   {movies && movies.map(movie => (
-                    <Movie key={movie.imdbID} movie={movie}/>
+                    <Link>
+                      <Movie movie={movie} key={movie.imdbID}/>
+                    </Link>
                   )
                   )}
                 </div>

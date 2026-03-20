@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Movie, { movies } from '../components/ui/Movie';
 import axios from 'axios';
 
-const Movies = ({ movies: initialMovies }) => {
-    const [movies, setMovies] = useState()
+const Movies = () => {
 
     async function renderMovies(filter) {
       let filteredMovies = [...movies];
@@ -15,12 +14,12 @@ const Movies = ({ movies: initialMovies }) => {
       }
       if (filter === "LOW_TO_HIGH") {
         filteredMovies.sort((a, b) =>
-          a.Year - b.Title
+          a.Year - b.Year
         );
       }}
 
         const [searchTerm, setSearchTerm] = useState('');
-        const [apiData, setApiData] = useState([]);
+        const [movies, setMovies] = useState([]);
         const [isLoading, setIsLoading] = useState(false);
         const [error, setError] = useState(null);
 
@@ -32,7 +31,7 @@ const Movies = ({ movies: initialMovies }) => {
           setIsLoading(true);
           try {
             const response = await axios.get(`https://www.omdbapi.com/?s=${searchTerm}&apikey=f311a7ce`)
-            setApiData(response.data.Search)
+            setMovies(response.data.Search)
           } catch (err) {
             setError(err.message);
           } finally {
@@ -44,7 +43,7 @@ const Movies = ({ movies: initialMovies }) => {
           if (searchTerm) {
             fetchData();
           } else {
-            setApiData(null);
+            setMovies(null);
           }
         }, [searchTerm]);
 
@@ -78,8 +77,9 @@ const Movies = ({ movies: initialMovies }) => {
                 <div className="movies">
                   {isLoading && <p>Loading...</p>}
                   {error && <p>Error: {error}</p>}
-                  {apiData && (
-                    <Movie />
+                  {movies && movies.map(movie => (
+                    <Movie key={movie.imdbID} movie={movie}/>
+                  )
                   )}
                 </div>
               </div>

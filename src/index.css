@@ -303,7 +303,6 @@ select {
 
 .movieInfo__container {
   height: 80vh;
-  display: flex;
 }
 
 .movieInfo__row {
@@ -319,6 +318,13 @@ select {
   max-height: 500px;
   width: auto;
   max-width: 100%;
+  width: 40%;
+}
+
+.info--img {
+  width: 100%;
+  max-width: 200px;
+  display: flex;
 }
 
 .movieInfo__text {
@@ -327,6 +333,7 @@ select {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  color: white;
 }
 
 /* SKELETON */

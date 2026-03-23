@@ -4,8 +4,7 @@ import axios from 'axios';
 import Skeleton from '../components/ui/Skeleton';
 import { Link, useParams } from 'react-router-dom';
 
-const Movies = ({ movies: initialMovies }) => {
-    const { imdbID } = useParams()
+const Movies = ({ movie }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [movies, setMovies] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -39,49 +38,47 @@ const Movies = ({ movies: initialMovies }) => {
       }, 300)
     }, [searchTerm]);
 
-    const [filteredMovies, setFilteredMovies] = useState(initialMovies);
-    const [searchID, setSearchID] = useState()
+    // const [filteredMovies, setFilteredMovies] = useState(initialMovies);
+    // const [searchID, setSearchID] = useState()
 
-    const fetchMovieInfo = async () => {
-      setIsLoading(true);
-      try {
-        const movieInfo = await axios.get(`https://www.omdbapi.com/?i=${movies.imdbID}&apikey=f311a7ce`)
-      } catch (err) {
-          setError(err.message);
-      } finally {
-        setIsLoading(false);
-      }
-    }
+    // const fetchMovieInfo = async () => {
+    //   setIsLoading(true);
+    //   try {
+    //     const movieInfo = await axios.get(`https://www.omdbapi.com/?i=${movies.imdbID}&apikey=f311a7ce`)
+    //   } catch (err) {
+    //       setError(err.message);
+    //   } finally {
+    //     setIsLoading(false);
+    //   }
+    // }
 
-    useEffect (() => {
-      if (searchID) {
-        fetchMovieInfo();
-      } else {
-          setSearchID(null);
-      }
-    }, [searchID])
+    // useEffect (() => {
+    //   if (searchID) {
+    //     fetchMovieInfo();
+    //   } else {
+    //       setSearchID(null);
+    //   }
+    // }, [searchID])
 
-    console.log(imdbID)
-
-    async function filterMovies(filter) {
-      console.log(searchID)
-      // if (filter === "RATING") {
-      //   setFilteredMovies(filteredMovies
-      //       .slice()
-      //       .sort(
-      //         (a, b) => (
-      //           a.
-      //         )
-      //       )
-      //   )
-      // }
-      if (filter === "LOW_TO_HIGH") {
-        filteredMovies.sort((a, b) =>
-          a.Year - b.Year
-        );
-      }
-      if (searchID === undefined) return;
-    }
+    // async function filterMovies(filter) {
+    //   console.log(searchID)
+    //   // if (filter === "RATING") {
+    //   //   setFilteredMovies(filteredMovies
+    //   //       .slice()
+    //   //       .sort(
+    //   //         (a, b) => (
+    //   //           a.
+    //   //         )
+    //   //       )
+    //   //   )
+    //   // }
+    //   if (filter === "LOW_TO_HIGH") {
+    //     filteredMovies.sort((a, b) =>
+    //       a.Year - b.Year
+    //     );
+    //   }
+    //   if (searchID === undefined) return;
+    // }
 
     return (
       <div id="movies__body">
@@ -103,7 +100,9 @@ const Movies = ({ movies: initialMovies }) => {
                       ></input>
                     <button>Search</button>
                   </div>
-                  <select id="filter" defaultValue="DEFAULT" onChange={(event) => filterMovies(event.target.value)} >
+                  <select id="filter" defaultValue="DEFAULT" 
+                    // onChange={(event) => filterMovies(event.target.value)} 
+                  >
                     <option value="DEFAULT" disabled>Sort</option>
                     <option value="RATING">Rating, High to Low</option>
                     <option value="HIGH_TO_LOW">Year, New to Old</option>
@@ -115,7 +114,7 @@ const Movies = ({ movies: initialMovies }) => {
                   {error && <p>Error: {error}</p>}
                   {movies && movies.map(movie => (
                     <Link to="/movieinfo">
-                      <Movie movie={movie} key={imdbID}/>
+                      <Movie movie={movie} key={movie.imdbID}/>
                     </Link>
                   )
                   )}

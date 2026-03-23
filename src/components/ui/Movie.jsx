@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import Skeleton from './Skeleton';
+import { useParams } from 'react-router-dom';
 
 const Movie = ({ movie }) => {
 
   const [img, setImg] = useState([]);
-  const ID = movie.imdbID
 
   return (
     <>
@@ -16,6 +16,7 @@ const Movie = ({ movie }) => {
           <div className="movie__description">
               <h3 className="movie__title">{movie.Title}</h3>
               <p className="year">{movie.Year}</p>
+              {movie.imdbID}
           </div>
         </div>
         </>

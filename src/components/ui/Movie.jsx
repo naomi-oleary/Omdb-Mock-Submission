@@ -5,6 +5,7 @@ import Skeleton from './Skeleton';
 const Movie = ({ movie }) => {
 
   const [img, setImg] = useState([]);
+  const ID = movie.imdbID
 
   return (
     <>

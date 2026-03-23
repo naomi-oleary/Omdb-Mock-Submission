@@ -249,7 +249,7 @@ li {
   font-size: 12px;
 }
 
-/* MOVIES INFO */
+/* MOVIES */
 
 #movies__body {
   flex: 1;
@@ -297,6 +297,36 @@ select {
   padding: 24px;
   align-items: center;
   justify-content: center;
+}
+
+/* MOVIE INFO */
+
+.movieInfo__container {
+  height: 80vh;
+  display: flex;
+}
+
+.movieInfo__row {
+  display: flex;
+  flex-direction: column;
+}
+
+.movieInfo__movie {
+  display: flex;
+}
+
+.movieInfo__img {
+  max-height: 500px;
+  width: auto;
+  max-width: 100%;
+}
+
+.movieInfo__text {
+  width: 60%;
+  padding: 16px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 /* SKELETON */

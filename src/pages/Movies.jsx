@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import Movie, { movies } from '../components/ui/Movie';
 import axios from 'axios';
 import Skeleton from '../components/ui/Skeleton';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const Movies = ({ movies: initialMovies }) => {
-
+    const { imdbID } = useParams()
     const [searchTerm, setSearchTerm] = useState('');
     const [movies, setMovies] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -45,7 +45,7 @@ const Movies = ({ movies: initialMovies }) => {
     const fetchMovieInfo = async () => {
       setIsLoading(true);
       try {
-        const movieInfo = await axios.get(`https://www.omdbapi.com/?i=${searchID}&apikey=f311a7ce`)
+        const movieInfo = await axios.get(`https://www.omdbapi.com/?i=${movies.imdbID}&apikey=f311a7ce`)
       } catch (err) {
           setError(err.message);
       } finally {
@@ -61,6 +61,8 @@ const Movies = ({ movies: initialMovies }) => {
       }
     }, [searchID])
 
+    console.log(imdbID)
+
     async function filterMovies(filter) {
       console.log(searchID)
       // if (filter === "RATING") {
@@ -73,11 +75,12 @@ const Movies = ({ movies: initialMovies }) => {
       //       )
       //   )
       // }
-      // if (filter === "LOW_TO_HIGH") {
-      //   filteredMovies.sort((a, b) =>
-      //     a.Year - b.Year
-      //   );
-      // }
+      if (filter === "LOW_TO_HIGH") {
+        filteredMovies.sort((a, b) =>
+          a.Year - b.Year
+        );
+      }
+      if (searchID === undefined) return;
     }
 
     return (
@@ -111,8 +114,8 @@ const Movies = ({ movies: initialMovies }) => {
                   {isLoading && <Skeleton />}
                   {error && <p>Error: {error}</p>}
                   {movies && movies.map(movie => (
-                    <Link>
-                      <Movie movie={movie} key={movie.imdbID}/>
+                    <Link to="/movieinfo">
+                      <Movie movie={movie} key={imdbID}/>
                     </Link>
                   )
                   )}

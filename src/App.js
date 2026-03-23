@@ -17,7 +17,7 @@ function App () {
           <Routes>
             <Route path="/" exact element={<Home />} />
             <Route path="/movies" element={<Movies />} />
-            <Route path="/movies/:id" element={<MovieInfo />} />
+            <Route path="/movieinfo" element={<MovieInfo />} />
           </Routes>
 
           <Footer />

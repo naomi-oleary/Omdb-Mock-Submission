@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 const MovieInfo = () => {
   const [info, setInfo] = useState('');
   const [error, setError] = useState(null);
-  const movieID = 'tt0372784';
+  const { movieID } = useParams()
 
   useEffect(() => {
     const fetchMovieInfo = async () => {

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const Movies = ({ movie }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [movies, setMovies] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     const handleChange = (event) => {
@@ -15,7 +15,7 @@ const Movies = ({ movie }) => {
     }
 
     const fetchData = async () => {
-      setIsLoading(true);
+      setLoading(true);
         try {
           const response = await axios.get(`https://www.omdbapi.com/?s=${searchTerm}&apikey=f311a7ce`)
           setMovies(response.data.Search)
@@ -23,19 +23,23 @@ const Movies = ({ movie }) => {
         catch (err) {
           setError(err.message);
         } finally {
-          setIsLoading(false);
+          const timeoutId = setTimeout(() => {
+            setLoading(false);
+          }, 1000);
+          return () => clearTimeout(timeoutId);
         }
     }
 
     useEffect (() => {
-      setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         if (searchTerm) {
           fetchData();
         }
         else {
           setMovies(null);
         }
-      }, 300)
+      }, 1000);
+      return () => clearTimeout(timeoutId);
     }, [searchTerm]);
 
     function sortMovies(sortType) {
@@ -55,16 +59,16 @@ const Movies = ({ movie }) => {
           break;
         case 'TITLE_A_Z':
           sortedMovies.sort((a, b) => {
-            const aTitle = a ? a.title : '';
-            const bTitle = b ? b.title : '';
-            return a.Title.localeCompare(bTitle);
+            const aTitle = a ? a.Title : '';
+            const bTitle = b ? b.Title : '';
+            return aTitle.localeCompare(bTitle);
           })
           break;
         default:
           return; 
       }
       
-      setMovies(sortedMovies)
+      setMovies(sortedMovies);
     }
 
     return (
@@ -97,14 +101,15 @@ const Movies = ({ movie }) => {
                   </select>
                 </div>
                 <div className="movies">
-                  {isLoading && <Skeleton />}
-                  {error && <p>Error: {error}</p>}
-                  {movies && movies.map((movie) => (
-                    <Link to="/movieinfo">
+                  {loading ? (
+                    <Skeleton />
+                  ) : (
+                    movies && movies.map((movie) => (
+                    <Link to={`/movieinfo/${movie.imdbID}`}>
                       <Movie key={movie.imdbID} movie={movie} />
-                    </Link>
-                  )
+                    </Link>))
                   )}
+                  {error && <p>Error: {error}</p>}
                 </div>
               </div>
             </div>

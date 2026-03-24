@@ -325,10 +325,20 @@ select {
 .movieInfo__row {
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
+  margin-top: 24px;
+  max-width: 76vw;
+}
+
+.back__btn {
+  font-size: 36px;
+  margin-left: 24px;
 }
 
 .movieInfo__movie {
   display: flex;
+  align-items: center;
+  margin: 24px auto;
 }
 
 .movieInfo__img {
@@ -342,48 +352,33 @@ select {
   width: 100%;
   max-width: 200px;
   display: flex;
+  border-radius: 8px;
 }
 
 .movieInfo__text {
   width: 60%;
-  padding: 16px 32px;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   color: white;
 }
 
+.movieInfo__description {
+  padding: 12px 0;
+}
+
 /* SKELETON */
-.skeleton__img,
-.skeleton__title,
-.skeleton__text {
-  background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: 8px;
+
+.skeleton {
+  font-size: 32px;
+  animation: spin 2s infinite;
 }
 
-.skeleton__img { 
-  width: 100%; 
-  height: 200px;
-}
-
-.skeleton__title {
-  width: 60%;
-  height: 20px;
-  margin: 24px 0;
-}
-
-.skeleton__text {
-  width: 90%;
-  height: 16px;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
+@keyframes spin {
+ from {
+  transform: rotate(0deg);
+ }
+ to {
+  transform: rotate(360deg);
+ }
 }

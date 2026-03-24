@@ -10,7 +10,7 @@ import MovieInfo from './pages/MovieInfo';
 function App () {
 
   return (
-    <Router basename="/naomi-oleary">
+    <Router>
         <div className="App">
           <Nav />
 

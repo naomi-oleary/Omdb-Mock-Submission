@@ -10,7 +10,7 @@ const Landing = () => {
           <h1 className="gold">RIMBERIO</h1>
           <h2>Discover Your Favorite Films</h2>
           <div className="landing__img--container">
-            <img src={ MovieImg } className="landing--img" />
+            <img src={ MovieImg } alt="landing img" className="landing--img" />
           </div>
         </div>
       </div>

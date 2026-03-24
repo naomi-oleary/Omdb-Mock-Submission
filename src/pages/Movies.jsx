@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import Movie, { movies } from '../components/ui/Movie';
+import Movie from '../components/ui/Movie';
 import axios from 'axios';
 import Skeleton from '../components/ui/Skeleton';
 import { Link } from 'react-router-dom';
 
-const Movies = ({ movie }) => {
+const Movies = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(false);

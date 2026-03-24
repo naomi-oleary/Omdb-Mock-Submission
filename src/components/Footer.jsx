@@ -12,7 +12,7 @@ const Footer = () => {
             <Link className="footer__link no-cursor">Contact</Link>
             <Link className="footer__link">Movies</Link>
           </div>
-          <img src={ Logo } className="footer__logo logo" />
+          <img src={ Logo } alt="website logo" className="footer__logo logo" />
           <div className="copyright">
             Copyright &copy; 2026 Naomi O'Leary
           </div>

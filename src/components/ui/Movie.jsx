@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import Skeleton from './Skeleton';
+import React from 'react';
 
 const Movie = ({ movie }) => {
-
-  const [img, setImg] = useState([]);
 
   return (
         <>

@@ -1,5 +1,4 @@
 import React from 'react';
-import Movie from './ui/Movie';
 import { Link } from 'react-router-dom';
 
 export default function Explore() {

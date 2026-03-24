@@ -8,7 +8,7 @@ const Nav = () => {
         <div className="nav__container">
             <div className="nav__row">
                 <Link>
-                    <img src={ Logo } className="logo" />
+                    <img src={ Logo } alt="logo" className="logo" />
                 </Link>
                 <ul className="nav__list">
                     <li className="nav__links">

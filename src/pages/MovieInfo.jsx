@@ -21,7 +21,7 @@ const MovieInfo = () => {
       } else {
         setError(response.data.Error);
       }
-      } catch (error) {
+      } catch (err) {
           setError(err.message);
       }
     };

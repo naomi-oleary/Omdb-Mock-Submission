@@ -1,7 +1,7 @@
 {
   "name": "react-final-project",
   "version": "0.1.0",
-  "homepage": "https://naomi-oleary.github.io/",
+  "homepage": "https://naomi-oleary.github.ionpm",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.1",

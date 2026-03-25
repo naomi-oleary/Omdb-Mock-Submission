@@ -14,11 +14,14 @@ const MovieInfo = () => {
       const response = await axios.get(`https://www.omdbapi.com/?i=${movieID}&apikey=f311a7ce`)
       console.log(response.data)
       if (response.data.Response === "True") {
+      
+      
+      
         setInfo(response.data);
       } else {
         setError(response.data.Error);
       }
-      } catch (err) {
+      } catch (error) {
           setError(err.message);
       }
     };

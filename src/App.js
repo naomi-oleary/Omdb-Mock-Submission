@@ -10,7 +10,7 @@ import MovieInfo from './pages/MovieInfo';
 function App () {
 
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <Router basename="/naomi-oleary">
         <div className="App">
           <Nav />
 
